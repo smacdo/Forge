@@ -15,9 +15,11 @@ public:
     GameWindow();
     virtual ~GameWindow();
 
+protected:
+    void closeEvent( QCloseEvent *event );
+
 public slots:
     void showlogin();
-    void close();
     void about();
 
 private:

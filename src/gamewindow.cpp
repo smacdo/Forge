@@ -1,6 +1,7 @@
 #include "gamewindow.h"
 #include "clientview.h"
 #include "chatwidget.h"
+#include "loginwindow.h"
 
 #include <QMainWindow>
 #include <QtGui>
@@ -28,17 +29,22 @@ GameWindow::~GameWindow()
 
 void GameWindow::showlogin()
 {
-    qDebug() << "connect";
-}
+    qDebug() << "Show login";
 
-void GameWindow::close()
-{
-    qDebug() << "quit";
+    LoginWindow login( this );
+    login.exec();
 }
 
 void GameWindow::about()
 {
-    qDebug() << "about";
+    QMessageBox::about( this, tr("About Forge Client"),
+                        tr("This is a simple networked 2d game tech demo") );
+}
+
+void GameWindow::closeEvent( QCloseEvent *event )
+{
+    qDebug() << "closing";
+    event->accept();
 }
 
 void GameWindow::configureActions()

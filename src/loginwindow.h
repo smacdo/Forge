@@ -2,6 +2,7 @@
 #define FORGE_LOGIN_WINDOW_H
 
 #include <QDialog>
+#include <QHostAddress>
 
 class QLabel;
 class QLineEdit;
@@ -14,6 +15,11 @@ class LoginWindow : public QDialog
 
 public:
     LoginWindow( QWidget *parent = 0 );
+
+    bool wasRegisterRequested() const;
+    QString username() const;
+    QString password() const;
+    QHostAddress server() const;
 
 private slots:
     void login();
@@ -28,6 +34,9 @@ private:
     QLineEdit *m_server;
     QPushButton *m_loginButton;
     QPushButton *m_registerButton;
+
+    bool m_registerRequested;
+    QHostAddress m_serverAddress;
 };
 
 #endif

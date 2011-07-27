@@ -7,9 +7,11 @@ LoginWindow::LoginWindow( QWidget *parent )
       m_serverLabel( new QLabel(tr("Server"), parent) ),
       m_username( new QLineEdit( parent ) ),
       m_password( new QLineEdit( parent ) ),
-      m_server( new QLineEdit( tr("Localhost"), parent ) ),
+      m_server( new QLineEdit( tr("localhost"), parent ) ),
       m_loginButton( new QPushButton(tr("&Login")) ),
-      m_registerButton( new QPushButton(tr("&Register")) )
+      m_registerButton( new QPushButton(tr("&Register")) ),
+      m_registerRequested( false ),
+      m_serverAddress( QHostAddress::LocalHost )
 {
     // Create and hook up dialog buttons
     connect( m_loginButton, SIGNAL(clicked()), this, SLOT(login()) );
@@ -31,16 +33,62 @@ LoginWindow::LoginWindow( QWidget *parent )
     setLayout( layout );
 
     // Finish up and pretty ourselves up
+    m_loginButton->setDefault( true );
+
     setWindowTitle( tr("Account Login") );
     resize( 300, 150 );
 }
 
 void LoginWindow::login()
 {
-    qDebug() << "Login clicked";
+    // Make sure they provided a username and password
+    if ( m_username->text().length() == 0 ||
+         m_password->text().length() == 0 ||
+         m_server->text().length()   == 0 )
+    {
+        QMessageBox::warning( this, tr("Account Login"),
+                              tr("You must provide account details to log in") );
+        return;
+    }
+
+    // Is this a valid hostname? Recogonize localhost as a special name
+    if ( m_server->text() == "localhost" )
+    {
+        m_serverAddress = QHostAddress( QHostAddress::LocalHost );
+    }
+    else if (! m_serverAddress.setAddress( m_server->text() ) )
+    {
+        QMessageBox::warning( this, tr("Account Login"),
+                              tr("The server address is invalid") );
+        return;
+    }
+
+    // Looks good!
+    accept();
 }
 
 void LoginWindow::newaccount()
 {
-    qDebug() << "New account clicked";
+    m_registerRequested = true;
+    reject();
+}
+
+bool LoginWindow::wasRegisterRequested() const
+{
+    return m_registerRequested;
+}
+
+QString LoginWindow::username() const
+{
+    return m_username->text();
+}
+
+QString LoginWindow::password() const
+{
+    return m_password->text();
+}
+
+QHostAddress LoginWindow::server() const
+{
+    return m_serverAddress;
 }
