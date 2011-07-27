@@ -1,0 +1,2 @@
+build on mac
+qmake -spec macx-g++
