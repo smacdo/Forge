@@ -1,4 +1,6 @@
 *.swp
 *.swo
 forge.app
-
+Makefile
+*.o
+moc_*
