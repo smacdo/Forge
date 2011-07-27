@@ -9,5 +9,5 @@ INCLUDEPATH += . src
 QT += network
 
 # Input
-HEADERS += src/gameclient.h src/gameserver.h src/logger.h src/loginwindow.h src/gamewindow.h src/clientview.h
-SOURCES += src/forge.cpp src/gameclient.cpp src/gameserver.cpp src/loginwindow.cpp src/gamewindow.cpp src/clientview.cpp
+HEADERS += src/gameclient.h src/gameserver.h src/logger.h src/loginwindow.h src/gamewindow.h src/clientview.h src/chatwidget.h
+SOURCES += src/forge.cpp src/gameclient.cpp src/gameserver.cpp src/loginwindow.cpp src/gamewindow.cpp src/clientview.cpp src/chatwidget.cpp
