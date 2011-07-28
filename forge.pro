@@ -2,7 +2,7 @@
 ### Forge QMake script
 ###
 TEMPLATE     = app
-TARGET       = forge
+TARGET       = Forge
 VERSION      = 0.1.1
 DEPENDPATH  += src
 INCLUDEPATH += src
@@ -11,18 +11,17 @@ CONFIG      += embed_manifest_exe
 MOC_DIR      = .build/moc
 OBJECTS_DIR  = .build/obj
 
-HEADERS += src/gameclient.h \
-           src/gameserver.h \
-           src/logger.h \
-           src/loginwindow.h \
-           src/gamewindow.h \
-           src/clientview.h \
-           src/chatwidget.h
+HEADERS += src/client/gameclient.h \
+           src/client/gamewindow.h \
+           src/client/clientview.h \
+           src/client/chatwidget.h \
+           src/client/loginwindow.h \
+           src/server/gameserver.h \
 
 SOURCES += src/forge.cpp \
-           src/gameclient.cpp \
-           src/gameserver.cpp \
-           src/loginwindow.cpp \
-           src/gamewindow.cpp \
-           src/clientview.cpp \
-           src/chatwidget.cpp
+           src/client/gameclient.cpp \
+           src/client/loginwindow.cpp \
+           src/client/gamewindow.cpp \
+           src/client/clientview.cpp \
+           src/client/chatwidget.cpp \
+           src/server/gameserver.cpp

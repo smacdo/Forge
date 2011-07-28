@@ -19,17 +19,23 @@ GameServer::~GameServer()
 
 void GameServer::start()
 {
+    int m_port = 42000;
     qDebug() << "GameServer::start";
 
-    m_socket->bind( 42000, QUdpSocket::ShareAddress );
+    m_socket->bind( QHostAddress::LocalHost, m_port );
     connect( m_socket, SIGNAL(readyRead()), this, SLOT(processDatagrams()) );
 
+    qDebug() << "[SERVER] Established socket on " << m_port;
+
     connect( m_timer, SIGNAL(timeout()), this, SLOT(runTimeslice()) );
-    m_timer->start( 1000 );
+
+    qDebug() << "[SERVER] Ready and waiting";
 }
 
 void GameServer::processDatagrams()
 {
+    qDebug() << "[SERVER] got stuff";
+
     //
     // process ALL the datagrams!!!!!!
     //
@@ -42,8 +48,13 @@ void GameServer::processDatagrams()
         m_socket->readDatagram( datagram.data(), datagram.size() );
 
         // now try to make heads and tails of the packet header
+        const char* data = datagram.data();
+        uint8_t messageType = *( reinterpret_cast<const uint8_t*>( &data[0] ) );
+
+        qDebug() << "[SERVER] id was " << (int) messageType;
 
         // deal with it
+        qDebug() << "[SERVER] Got: " << datagram;
     }
 }
 
