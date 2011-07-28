@@ -1,0 +1,42 @@
+Overview
+==========
+Forge is a simple networked game that allows players to chat and play
+together in a frightening and untamed world. Forge is written in Qt and
+is currently under heavy developement - work just started!
+
+Please feel free to play around whenever you want. I'm developing this
+game in my spare time to learn about Qt, networking design, and writing a
+scriptable, highly data driven game. Basically, things are probably going
+to break a lot, and won't be optimally written for a long time! But that's
+OK, since its better to get it working and then get it right.
+
+Please try the game out when you get a chance, and send some feedback!
+User experience, game play and code design feedback is welcomed.
+
+Contributions
+=============
+Contributions of all kinds are highly welcome. Please give the game a spin,
+and if you feel like contributing ideas, artwork or code please contact me.
+
+
+TODO List
+=============
+
+    * Milestone 1: "Its alive"
+        * Develop client shell (done)
+        * Develop server shell (done)
+        * Send a login message from client to server (in progress)
+        * Client must keep track of login
+        * Keep track of valid and authenticated sessions
+        * Player can chat with others
+        * Prototype out a GUI
+            * Main game window (in progress)
+            * Server dialog
+            * Login dialog
+            * Register dialog
+    * Milestone 2
+        * Player can move around the world
+        * Players can form chat channels
+    * Milestone 3
+        * Network needs to work much much better
+        * Packets must be able to survive across unreliable connections
